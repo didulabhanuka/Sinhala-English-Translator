@@ -32,8 +32,8 @@ app.get('/languages', async (req, res) => {
     url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/languages',
     headers: {
       'Accept-Encoding': 'application/gzip',
-      'X-RapidAPI-Key': 'baf89a1052msh16f4f2dfb0a11b5p1945e4jsn4c7e1762fc58',
-      'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
+      'X-RapidAPI-Key': ' ',
+      'X-RapidAPI-Host': ' ',
     },
   }
 
@@ -59,8 +59,8 @@ app.get('/translation', async (req, res) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept-Encoding': 'application/gzip',
-      'X-RapidAPI-Key': 'baf89a1052msh16f4f2dfb0a11b5p1945e4jsn4c7e1762fc58',
-      'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
+      'X-RapidAPI-Key': ' ',
+      'X-RapidAPI-Host': ' ',
     },
     data: `q=${textToTranslate}&target=${outputLanguage}&source=${inputLanguage}`,
   };

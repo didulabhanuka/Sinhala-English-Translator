@@ -17,8 +17,8 @@ const TranslationApp = () => {
     try {
       const response = await axios.get('https://google-translate1.p.rapidapi.com/language/translate/v2/languages', {
         headers: {
-          'X-RapidAPI-Key': 'baf89a1052msh16f4f2dfb0a11b5p1945e4jsn4c7e1762fc58',
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
+          'X-RapidAPI-Key': ' ',
+          'X-RapidAPI-Host': ' ',
           'Accept-Encoding': 'application/gzip',
         },
       })
@@ -43,8 +43,8 @@ const TranslationApp = () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': 'baf89a1052msh16f4f2dfb0a11b5p1945e4jsn4c7e1762fc58',
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
+          'X-RapidAPI-Key': ' ',
+          'X-RapidAPI-Host': ' ',
         },
       })
       setTranslatedText(response.data.data.translations[0].translatedText)
