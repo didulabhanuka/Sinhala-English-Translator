@@ -10,7 +10,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.container {
+.nav-container {
   max-width: 1950px;
   width: 100%;
   margin: auto;
@@ -38,7 +38,7 @@ body {
 
 }
 
-.navbar1 .nav-container li {
+.navbar1 .nav-container .head-li {
   list-style: none;
 }
 
@@ -51,7 +51,7 @@ body {
 
 }
 
-.navbar1 .nav-container a:hover {
+.navbar1 .nav-container .head-a:hover {
   font-weight: bolder;
 }
 
@@ -127,7 +127,7 @@ body {
   top: 0;
 }
 
-.navbar1 .menu-items li {
+.navbar1 .menu-items .head-li {
   margin-bottom: 1.2rem;
   font-size: 1.5rem;
   font-weight: 500;

@@ -21,11 +21,11 @@ function Adheader() {
                 <br></br><h2>Sinhala-English Translator</h2>
               </div>
               <div class="menu-items">
-                <li><a href="/">Translator</a></li>
-                <li><a href="/synonym">Synonyms</a></li>
-                <li><a href="/antonym">Antonyms</a></li>
-                <li><a href="#">Phase book</a></li>
-                <li><a href="#">About</a></li>
+                <li className="head-li"><a className="head-a" href="/">Translator</a></li>
+                <li className="head-li"><a className="head-a" href="/synonym">Synonyms</a></li>
+                <li className="head-li"><a className="head-a" href="/antonym">Antonyms</a></li>
+                <li className="head-li"><a className="head-a" href="#">Phase book</a></li>
+                <li className="head-li"><a className="head-a" href="#">About</a></li>
               </div>
             </div>
           </div>

@@ -1,0 +1,31 @@
+.sy-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .sy-table td, .sy-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .sy-table tr:nth-child(even){background-color: #ffffff63;}
+  .sy-table tr:nth-child(odd){background-color: #d3d1d171;}
+  
+  .sy-table tr:hover {background-color: #0981616c;}
+  
+  .sy-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #00563f;
+    color: white;
+  }
+
+  .table-container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    max-width: 90%;
+  }

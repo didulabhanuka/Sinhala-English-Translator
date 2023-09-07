@@ -22,7 +22,7 @@ body {
 /* body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh }
 html { box-sizing: border-box; height: 100%; font-size: 10px; } *, *::before, *::after { box-sizing: inherit; } */
 
-form {
+.search {
     width: 60%;
     position: relative;
     margin-left: auto;
@@ -32,8 +32,8 @@ form {
     border: 6px solid #00563f;
 }
 
-input,
-button {
+.search-input,
+.go {
     height: var(--height);
     font-family: var(--font-fam);
     border: 0;
@@ -43,7 +43,7 @@ button {
     border-color: #00563f;
 }
 
-input[type="search"] {
+.search-input[type="search"] {
     outline: 0;
     width: 100%;
     background: var(--color-light);
@@ -57,7 +57,7 @@ input[type="search"] {
     color: #00563f;
 }
 
-button {
+.go {
     display: none;
     position: absolute;
     top: 0;
@@ -69,7 +69,7 @@ button {
     color: #ffffff;
 }
 
-input:not(:placeholder-shown) {
+.search-input:not(:placeholder-shown) {
     border-radius: var(--rad) 0 0 var(--rad);
     width: calc(100% - var(--btn-width));
 
@@ -77,7 +77,7 @@ input:not(:placeholder-shown) {
         display: block;
     }
 }
-
+/* 
 label {
     position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
@@ -88,4 +88,35 @@ label {
     overflow: hidden;
     border-width: 20px;
     border-color: #00563f;
+} */
+
+/* your action css */
+.btn-group{
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin-bottom: 30px;
+    margin-right: 30px;
 }
+.btn{
+    height: 80px;
+    border-radius: 50px;
+    width: 110px;
+    border-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.btn:hover{
+    /* border-color: #00563f; */
+    border: 2px;
+    background-color: #00563f8c;
+    /* color: black; */
+}
+
+i{
+    background-color: #ffffff;
+}
+/* 
+svg:hover{
+    color: aqua;
+} */

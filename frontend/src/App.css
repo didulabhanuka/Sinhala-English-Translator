@@ -4,6 +4,7 @@
 
 .body {
   max-width: 70%;
+  align-items: center;
 }
 
 .App-logo {
