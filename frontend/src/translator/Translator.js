@@ -9,7 +9,7 @@ const TranslationApp = () => {
   const [showModal, setShowModal] = useState(false)
   const [languages, setLanguages] = useState(null)
   const [inputLanguage, setInputLanguage] = useState('en') // Use language codes instead of language names
-  const [outputLanguage, setOutputLanguage] = useState('pl') // Use language codes instead of language names
+  const [outputLanguage, setOutputLanguage] = useState('si') // Use language codes instead of language names
   const [textToTranslate, setTextToTranslate] = useState('')
   const [translatedText, setTranslatedText] = useState('')
 
@@ -18,15 +18,17 @@ const TranslationApp = () => {
       const response = await axios.get('https://google-translate1.p.rapidapi.com/language/translate/v2/languages', {
         headers: {
           'X-RapidAPI-Key': ' ',
-          'X-RapidAPI-Host': ' ',
+          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
           'Accept-Encoding': 'application/gzip',
         },
       })
       setLanguages(response.data.data.languages)
+      
     } catch (error) {
       console.error(error)
     }
   }
+  
 
   useEffect(() => {
     getLanguages()
@@ -44,7 +46,7 @@ const TranslationApp = () => {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept-Encoding': 'application/gzip',
           'X-RapidAPI-Key': ' ',
-          'X-RapidAPI-Host': ' ',
+          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
         },
       })
       setTranslatedText(response.data.data.translations[0].translatedText)
