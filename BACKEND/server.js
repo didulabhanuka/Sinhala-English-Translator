@@ -25,3 +25,7 @@ connection.once("open", () => {
 app.listen(PORT, () => {
   console.log(`Server is up and running on port ${PORT}`);
 });
+
+//routes
+const translateRoute = require("./routes/translater_route");
+app.use("/translate-controller", translateRoute);
