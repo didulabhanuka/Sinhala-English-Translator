@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 require("dotenv").config();
-
+const synonymsRouter = require('./routes/synonyms.js'); 
+const antonymsRouter = require('./routes/antonyms.js'); 
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
@@ -24,3 +25,9 @@ connection.once("open", () => {
 app.listen(PORT, () => {
     console.log(`Server is up and running on port ${PORT}`)
 })
+
+//synonyms                
+app.use('/synonyms', synonymsRouter);
+
+//antonyms
+app.use('/antonyms', antonymsRouter);

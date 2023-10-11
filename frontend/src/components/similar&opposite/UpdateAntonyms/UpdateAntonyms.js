@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef} from "react";
 import { Link } from 'react-router-dom';
-import './UpdateSynonyms.css';
 import axios from "axios";
 
 function searchByWord() {
@@ -22,37 +21,37 @@ function searchByWord() {
   }
 }
 
-export default function UpdateSynonyms() {
+export default function UpdateAntonyms() {
 
-  const [synonyms, setSynonyms] = useState([]);
+  const [antonyms, setAntonyms] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
   const inputRefs = useRef([]);
 
-  const editSynonym = (index) => {
+  const editAntonym = (index) => {
     const inputElement = inputRefs.current[index];
     inputElement.disabled = false;
 
-    console.log(synonyms[index]._id);
+    console.log(antonyms[index]._id);
   };
 
   const handleKeyPress = (event, index) => {
-    const id = synonyms[index]._id;
-    const word = synonyms[index].word;
-    const synonym = synonyms[index].synonym;
-    const status = synonyms[index].status;
+    const id = antonyms[index]._id;
+    const word = antonyms[index].word;
+    const antonym = antonyms[index].antonym;
+    const status = antonyms[index].status;
 
-    const updatedSynonym = {
+    const updateAntonym = {
       word,
-      synonym,
+      antonym,
       status,
     };
 
     if (event.key === "Enter") {
       axios
         .put(
-          `http://localhost:8070/synonyms/updateSynonym/${id}`,
-          updatedSynonym
+          `http://localhost:8070/antonyms/updateAntonym/${id}`,
+          updateAntonym
         )
         .then(() => {
           setShowPopup(true);
@@ -67,13 +66,13 @@ export default function UpdateSynonyms() {
 
   
   const handleInputChange = (event, id) => {
-    const newInputValues = synonyms.map((input) => {
+    const newInputValues = antonyms.map((input) => {
       if (input._id === id) {
-        return { ...input, synonym: event.target.value };
+        return { ...input, antonym: event.target.value };
       }
       return input;
     });
-    setSynonyms(newInputValues);
+    setAntonyms(newInputValues);
   };
 
 
@@ -93,23 +92,24 @@ export default function UpdateSynonyms() {
   
 
   useEffect(() => {
-    function getSynonyms() {
-      axios.get("http://localhost:8070/synonyms/synonymsTable").then((res) => {
-        setSynonyms(res.data);
+    function getAntonym() {
+      axios.get("http://localhost:8070/antonyms/antonymTable").then((res) => {
+        setAntonyms(res.data);
       }).catch((err) => {
         alert(err.message);
       })
     }
-    getSynonyms();
+    getAntonym();
   }, [])
-
+  
   //delete
-  const deleteSynonym = (e) => {
+  const deleteAntonym = (e) => {
     // console.log("event for delete", e.target);
     axios
-      .delete(`http://localhost:8070/synonyms/deleteSynonym/${e.target.id}`)
+      .delete(`http://localhost:8070/antonyms/deleteAntonym/${e.target.id}`)
       .then((res) => {
         console.log("done");
+        setShowPopup(true);
       })
       .catch((err) => console.log(err));
     window.location.reload();
@@ -120,7 +120,7 @@ export default function UpdateSynonyms() {
       <br></br>
       <br></br>
 
-      <h1>Update Synonyms</h1>
+      <h1>Update Antonyms</h1>
 
       <div className="">
           <input
@@ -137,24 +137,24 @@ export default function UpdateSynonyms() {
           <tr>
             <th style={{ width: '300px' }}>number</th>
             <th>Word</th>
-            <th>Synonyms</th>
+            <th>Antonyms</th>
             <th >Update</th>
             <th >Delete</th>
           </tr>
-          {synonyms && synonyms.map((synonym, index) => (
+          {antonyms && antonyms.map((antonym, index) => (
             <tr>
               <td>{index + 1}</td>
-              <td><p key={synonym._id}>{synonym.word}</p></td>
-              {/* <td><p key={synonym._id}>{synonym.synonym}</p></td> */}
+              <td><p key={antonym._id}>{antonym.word}</p></td>
+              {/* <td><p key={antonym._id}>{antonym.antonym}</p></td> */}
               <td className="td">
                       <input
                         className="td-input"
-                        key={synonym._id}
+                        key={antonym._id}
                         disabled
                         ref={(el) => (inputRefs.current[index] = el)}
-                        value={synonym.synonym}
+                        value={antonym.antonym}
                         onChange={(e) => {
-                          handleInputChange(e, synonym._id);
+                          handleInputChange(e, antonym._id);
                         }}
                         onKeyDown={(event) => {
                           handleKeyPress(event, index);
@@ -163,7 +163,7 @@ export default function UpdateSynonyms() {
               </td>
               <td> 
               <button className="action-button" type="button" onClick={() => {
-                          editSynonym(index);
+                          editAntonym(index);
                         }}>
               <i class="bi bi-pencil-square" style={{ marginLeft: '40px' }}></i>
               {/* <Link > */}
@@ -175,7 +175,7 @@ export default function UpdateSynonyms() {
               </button>
               </td>
               <td>
-              <button className="action-button" id={synonym._id} onClick={deleteSynonym} type="button"  >
+              <button className="action-button" id={antonym._id} onClick={deleteAntonym} type="button"  >
                 <i  class="bi bi-trash3-fill" style={{ marginLeft: '40px' }}></i>
                 <svg style={{ color: '72160f' }} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
@@ -209,7 +209,7 @@ export default function UpdateSynonyms() {
 
       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
         <button type="button" class="btn1" >
-          <Link to="/addSynonyms">
+          <Link to="/addAntonyms">
             <i class="bi bi-plus-circle-fill"></i>
             <svg style={{ color: '#ffffff' }} xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
