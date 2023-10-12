@@ -8,6 +8,13 @@ export default function Antonyms() {
   const [word, setWord] = useState("");
   const [antonyms, setantonyms] = useState([]);
 
+  const handleWordChange = (event) => {
+    const inputValue = event.target.value;
+    const alphabeticValue = inputValue.replace(/[^a-zA-Z]/g, "");
+    setWord(alphabeticValue);
+  };
+
+
   const handleSearch = () => {
     // Make an API request to fetch antonyms based on the entered word
     axios.get(`http://localhost:8070/antonyms/antonymSearch?word=${word}`)
@@ -26,19 +33,6 @@ export default function Antonyms() {
       .catch((err) => {
         alert(err.message);
       });
-      
-      document.getElementById("search").addEventListener("input", (event) => {
-        // Get the entered value
-        const inputValue = event.target.value;
-      
-        // Use a regular expression to check if the input contains only alphabetic characters
-        const isAlphabetic = /^[a-zA-Z]+$/.test(inputValue);
-      
-        // If the input contains non-alphabetic characters, remove them
-        if (!isAlphabetic) {
-          event.target.value = inputValue.replace(/[^a-zA-Z]/g, "");
-        }
-      })
   };
 
   return (
@@ -56,9 +50,8 @@ export default function Antonyms() {
           type="search"
           className="search-input"
           placeholder="Enter a word"
-          onChange={(e) => {
-            setWord(e.target.value);
-          }}
+          value={word}
+          onChange={handleWordChange}
         required/>
         <button className="go" type="button" onClick={handleSearch} >
           Go

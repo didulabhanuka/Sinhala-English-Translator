@@ -7,8 +7,21 @@ export default function AddAntonyms() {
 
   const [word,setWord] =useState("");
   const [synonym,setSynonym] =useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const status = "active";
-  
+ 
+  const handleWordChange = (event) => {
+    const inputValue = event.target.value;
+    const alphabeticValue = inputValue.replace(/[^a-zA-Z]/g, "");
+    setWord(alphabeticValue);
+  };
+
+  const handleSynonymChange = (event) => {
+    const inputValue = event.target.value;
+    const alphabeticValue = inputValue.replace(/[^a-zA-Z]/g, "");
+    setSynonym(alphabeticValue);
+  };
+
   function sendData(e){
     e.preventDefault();
   
@@ -18,20 +31,32 @@ export default function AddAntonyms() {
       status
     }
     
-    axios.post("http://localhost:8070/synonyms/SynonymAdd",newSynonym).then(()=>{{[
-      'success'
-      ].map((variant) => (
-      <alert variant="success">Synnonym is added</alert>
-    ))}
-      alert("data added")
-    }).catch((err)=>{{[
-      'danger'
-      ].map((variant) => (
-      <alert>data not added</alert>
-    ))}
-      // alert("data not added")
-      // console.log(err);
+    // axios.post("http://localhost:8070/synonyms/SynonymAdd",newSynonym).then(()=>{{[
+    //   'success'
+    //   ].map((variant) => (
+    //   <alert variant="success">Synnonym is added</alert>
+    // ))}
+    //   alert("data added")
+    // }).catch((err)=>{{[
+    //   'danger'
+    //   ].map((variant) => (
+    //   <alert>data not added</alert>
+    // ))}
+    //   // alert("data not added")
+    //   // console.log(err);
+    // })
+
+    axios
+    .post("http://localhost:8070/synonyms/SynonymAdd",newSynonym)
+    .then(() => {
+      setShowPopup(true);
     })
+    .catch((err) => {
+      alert(err);
+    });
+
+
+   
   
   }
 
@@ -51,14 +76,20 @@ export default function AddAntonyms() {
           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter word" 
           onChange={(e)=>{
             setWord(e.target.value);
-          }}/>
+            handleWordChange(e);
+          }}
+          value={word}
+          required/>
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Synonym</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter synonym" 
           onChange={(e)=>{
             setSynonym(e.target.value);
-          }}/>
+            handleSynonymChange(e);
+          }}
+          value={synonym}
+          required/>
         </div>
       </div>
       <div class="vertical-center">
@@ -76,6 +107,24 @@ export default function AddAntonyms() {
           </Link>
         </button>
       </div>
+
+
+      {showPopup === true && (
+        <div className="popup">
+          <div className="d-flex justify-content-center popup-box">
+            <div className="text-white pop-heading">Successfully added synonym</div>
+
+            <button
+              onClick={() => {
+                setShowPopup(false);
+              }}
+              className="pop-btn btn-success"
+            >
+              ok
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

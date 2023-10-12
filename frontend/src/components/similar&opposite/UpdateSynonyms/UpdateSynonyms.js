@@ -109,6 +109,7 @@ export default function UpdateSynonyms() {
     axios
       .delete(`http://localhost:8070/synonyms/deleteSynonym/${e.target.id}`)
       .then((res) => {
+        setShowPopup(true);
         console.log("done");
       })
       .catch((err) => console.log(err));

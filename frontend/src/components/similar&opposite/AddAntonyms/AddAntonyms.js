@@ -7,8 +7,22 @@ export default function AddAntonyms() {
 
   const [word,setWord] =useState("");
   const [antonym,setAntonym] =useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const status = "active";
   
+  const handleWordChange = (event) => {
+    const inputValue = event.target.value;
+    const alphabeticValue = inputValue.replace(/[^a-zA-Z]/g, "");
+    setWord(alphabeticValue);
+  };
+
+  const handleAntonymChange = (event) => {
+    const inputValue = event.target.value;
+    const alphabeticValue = inputValue.replace(/[^a-zA-Z]/g, "");
+    setAntonym(alphabeticValue);
+  };
+
+
   function sendData(e){
     e.preventDefault();
   
@@ -17,21 +31,15 @@ export default function AddAntonyms() {
       antonym,
       status
     }
-    
-    axios.post("http://localhost:8070/antonyms/AntonymAdd",newAntonym).then(()=>{{[
-      'success'
-      ].map((variant) => (
-      <alert variant="success">data added</alert>
-    ))}
-      alert("data added")
-    }).catch((err)=>{{[
-      'danger'
-      ].map((variant) => (
-      <alert>data not added</alert>
-    ))}
-      // alert("data not added")
-      // console.log(err);
+
+    axios
+    .post("http://localhost:8070/antonyms/AntonymAdd",newAntonym)
+    .then(() => {
+      setShowPopup(true);
     })
+    .catch((err) => {
+      alert(err);
+    });
   
   }
 
@@ -51,20 +59,46 @@ export default function AddAntonyms() {
           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter word" 
           onChange={(e)=>{
             setWord(e.target.value);
-          }}/>
+            handleWordChange(e);
+          }}
+          value={word}
+          required/>
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput2" class="form-label">Antonym</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter antonym" 
           onChange={(e)=>{
             setAntonym(e.target.value);
-          }}/>
+            handleAntonymChange(e);
+          }}
+          value={antonym}
+          required/>
         </div>
       </div>
       <div class="vertical-center">
         <button className="add-button">ADD</button>
       </div>
       </form>
+
+
+      {showPopup === true && (
+        <div className="popup">
+          <div className="d-flex justify-content-center popup-box">
+            <div className="text-white pop-heading">Successfully added antonym</div>
+
+            <button
+              onClick={() => {
+                setShowPopup(false);
+              }}
+              className="pop-btn btn-success"
+            >
+              ok
+            </button>
+          </div>
+        </div>
+      )}
+
+
       <div className="btn-group" role="group" aria-label="Basic mixed styles example">
         <button type="button" className="btn1">
           <Link to="/updateAntonyms">
